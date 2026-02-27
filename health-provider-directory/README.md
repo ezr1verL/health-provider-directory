@@ -1,38 +1,70 @@
-<<<<<<< HEAD
-HealthTech Provider Directory \& Data Quality Service
+# HealthTech Provider Directory & Data Quality Service
 
+## Overview
 
+A RESTful backend service built with FastAPI and PostgreSQL to simulate a healthcare provider directory system. The service supports indexed provider search, ETL-based data normalization, and automated data quality reporting. Designed with audit visibility and role-based access control patterns in mind.
 
-Overview
+---
 
-A RESTful backend service built with FastAPI and PostgreSQL. Supports provider search filters (specialty, zip, network), ETL-style data normalization, and automated data-quality reporting.
+## Architecture
 
+FastAPI application layer  
+PostgreSQL relational database (normalized schema)  
+Indexed search filters for query performance  
+ETL-style normalization workflow  
+Structured logging and RBAC for audit traceability  
 
+---
 
-Tech Stack
+## Database Schema
 
-FastAPI, PostgreSQL, Python
+Tables:
 
+- providers  
+- specialty  
+- network  
 
+Indexes:
 
-Key Features
+- idx_specialty  
+- idx_zip  
+- idx_network  
 
-\- Provider directory API (create, list, filter)
+Schema design emphasizes normalization, query performance, and data integrity.
 
-\- Indexed search filters
+---
 
-\- ETL normalization
+## API Endpoints
 
-\- Data quality reporting
+| Method | Endpoint        | Description |
+|--------|----------------|-------------|
+| GET    | /              | Health check |
+| GET    | /providers     | List providers with filters (specialty, zip, network) |
+| POST   | /providers     | Create new provider |
+| GET    | /quality-report | Generate data quality metrics |
+| GET    | /docs          | Swagger documentation |
 
-\- RBAC patterns and logging
+---
 
+## Data Quality Features
 
+- Duplicate detection  
+- Missing field detection  
+- Record conflict checks  
+- Automated quality reporting  
 
-Run Locally
+---
 
-uvicorn app.main:app --reload
+## Security & Audit Considerations
 
-=======
-# health-provider-directory
->>>>>>> e9e8e3b0f61d9b3f74983893e5e32b998db2e6eb
+- Role-Based Access Control (RBAC) pattern  
+- Structured logging for update tracking  
+- Designed for audit-ready operational environments  
+
+---
+
+## Run Locally
+
+```bash
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload
